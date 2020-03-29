@@ -22,8 +22,8 @@ board.on("ready", function(){
 
   // Make sure motion sensor is properly calibrated
   motion.on("calibrated", function(){
-    console.log("calibrated")
-    calibrated = true
+    console.log("calibrated");
+    calibrated = true;
   });
 
   // Fire 'motionstart' event when
@@ -33,7 +33,7 @@ board.on("ready", function(){
     // if(calibrated) startPictureProcess()
 
     if (calibrated) {
-
+      startPictureProcess();
     }
   });
 

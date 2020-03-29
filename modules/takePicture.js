@@ -6,6 +6,11 @@ let createFileNameAsDate = () => {
   return date.toString().replace("(", ":").replace(")", ":").split(" ").join("_") + ".jpg";
 }
 
+/**
+ * Takes picture with raspbian raspistill command line utility.
+ * @returns {string} author - The author of the book.
+ */
+
 module.exports.takePicture = () => {
   return new Promise( (resolve, reject) => {
 
