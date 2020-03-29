@@ -7,29 +7,15 @@ let { deletePictureFile } = require('./modules/removePictureFile.js')
 // Set flag variable to prevent overloading the Raspberry Pi
 let processingImage = false;
 
-module.exports.startPictureProcess = async () => {
+module.exports.startPictureProcess = () => {
 
   // Check to see if an image is currently being processed
   if (!processingImage) {
 
-    processingImage = true;
-    let currentImageFile;
+    processingImage = true
+    let currentImageFile
 
-    // Take Picture
-
-    const pathToNewPicture = await takePicture();
-
-    console.log('pathToNewPicture', pathToNewPicture);
-
-    const readPicture = await readPictureFile(pathToNewPicture);
-
-    // Send picture to API endpoint
-
-
-    // Delete Picture
-
-
-
+    //Begin Promise Chain
 
     takePicture()
       // Read picture file
