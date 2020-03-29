@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 const Five = require("johnny-five");
-const Raspi = require("raspi-io");
+const Raspi = require("raspi-io").RaspiIO;
 
 const { startPictureProcess } = require('./startPictureProcess');
 
@@ -28,7 +28,7 @@ board.on("ready", function(){
 
   // Fire 'motionstart' event when
   motion.on("motionstart", function(){
-    console.log("motion started")
+    console.log("motion started");
 
     // if(calibrated) startPictureProcess()
 
@@ -38,10 +38,10 @@ board.on("ready", function(){
   });
 
   motion.on("motionend", function(){
-    console.log("motion ended")
+    console.log("motion ended");
   });
 
   motion.on("change", function(){
-    console.log("change fired")
+    console.log("change fired");
   });
 });

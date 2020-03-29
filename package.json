@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Wisbell/home-watcher-remake-pi#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "johnny-five": "^1.4.0",
+    "raspi-io": "^11.0.0"
   }
 }

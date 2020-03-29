@@ -19,11 +19,15 @@ module.exports.startPictureProcess = async () => {
 
     const pathToNewPicture = await takePicture();
 
-    currentImageFile = pathToNewPicture;
+    // currentImageFile = pathToNewPicture;
 
     console.log('pathToNewPicture', pathToNewPicture);
 
-    const readPicture = await readPictureFile(pathToNewPicture);
+    // const readPicture = await readPictureFile(pathToNewPicture);
+
+    // console.log('readPicture', readPicture);
+
+    // processingImage = false; // un comment this
 
     // Send picture to API endpoint
 

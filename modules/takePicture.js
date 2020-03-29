@@ -1,4 +1,5 @@
 const { exec } = require("child_process");
+const path = require('path');
 
 // Create date for picture file name
 let createFileNameAsDate = () => {
@@ -8,7 +9,7 @@ let createFileNameAsDate = () => {
 
 /**
  * Takes picture with raspbian raspistill command line utility.
- * @returns {string} author - The author of the book.
+ * @returns {string} Path to new picture
  */
 
 module.exports.takePicture = () => {
@@ -16,7 +17,7 @@ module.exports.takePicture = () => {
 
     // Create argument to pass to execute raspistill
     let fileName = createFileNameAsDate();
-    let createPath = "images/" + fileName;
+    let createPath = path.join(process.cwd(), fileName);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 
     exec(cameraArgument, (err, stdout, stderr) => {
