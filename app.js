@@ -30,11 +30,7 @@ board.on("ready", function(){
   motion.on("motionstart", function(){
     console.log("motion started");
 
-    // if(calibrated) startPictureProcess()
-
-    if (calibrated) {
-      startPictureProcess();
-    }
+    if(calibrated) startPictureProcess();
   });
 
   motion.on("motionend", function(){

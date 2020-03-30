@@ -16,7 +16,8 @@ module.exports.takePicture = () => {
   return new Promise( (resolve, reject) => {
 
     // Create argument to pass to execute raspistill
-    let fileName = createFileNameAsDate();
+    let fileName = createFileNameAsDate().replace(/:/g, '');
+    console.log('fileName', fileName);
     let createPath = path.join(process.cwd(), fileName);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 

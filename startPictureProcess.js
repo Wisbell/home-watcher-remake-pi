@@ -1,64 +1,44 @@
-let { takePicture } = require('./modules/takePicture');
-let { readPictureFile } = require('./modules/readPictureFile');
-// let { sendPictureToAWS, checkStorageAmount } = require('./modules/awsS3')
-// let { postData } = require('./modules/postDataToMongoDB')
-// let { deletePictureFile } = require('./modules/removePictureFile.js')
+const { takePicture } = require('./modules/takePicture');
+const { readPictureFile } = require('./modules/readPictureFile');
+const { sendPictureToApi } = require('./modules/api');
+const { deletePictureFile } = require('./modules/removePictureFile.js');
+
+const fs = require('fs');
 
 // Set flag variable to prevent overloading the Raspberry Pi
 let processingImage = false;
 
 module.exports.startPictureProcess = async () => {
 
-  // Check to see if an image is currently being processed
   if (!processingImage) {
 
     processingImage = true;
-    let currentImageFile;
-
-    // Take Picture
+    let currentImageFilePath;
 
     const pathToNewPicture = await takePicture();
 
-    // currentImageFile = pathToNewPicture;
+    currentImageFilePath = pathToNewPicture;
 
-    console.log('pathToNewPicture', pathToNewPicture);
+    // Note: readPicture = { dataBuffer, filePath }
+    const readPicture = await readPictureFile(pathToNewPicture);
 
-    // const readPicture = await readPictureFile(pathToNewPicture);
+    // Note: Storing picture as string in order to avoid storing in disk
+    const pictureAsString = readPicture.dataBuffer.toString('base64');
 
-    // console.log('readPicture', readPicture);
+    fs.writeFileSync('./test.txt', pictureAsString);
 
-    // processingImage = false; // un comment this
+
+    const imageFileName = currentImageFilePath
+      .split('/')
+      .pop();
 
     // Send picture to API endpoint
-
+    // await sendPictureToApi(readPicture, imageFileName);
 
     // Delete Picture
+    // await deletePictureFile(currentImageFilePath);
 
-
-
-
-    // takePicture()
-    //   // Read picture file
-    //   .then( (filePath) => {
-    //     currentImageFile = filePath
-    //     return readPictureFile(filePath)
-    //   })
-    //   // Send picture to AWS S3
-    //   .then( (dataObject) => {
-    //     return sendPictureToAWS(dataObject)
-    //   })
-    //   // Send returned URL and data to MongoDB
-    //   .then( (data) => {
-    //     return postData(data)
-    //   })
-    //   // Delete picture file on RPI -- Switch readFile to readStream to avoid this step?
-    //   .then( () => {
-    //     return deletePictureFile(currentImageFile)
-    //   })
-    //   // reset processingImage flag variable
-    //   .then( () => {
-    //     processingImage = checkStorageAmount()
-    //   })
+    // processingImage = false;
 
   } // Closes if statement for proccessing image
 }
