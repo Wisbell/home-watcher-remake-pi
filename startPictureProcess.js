@@ -23,22 +23,21 @@ module.exports.startPictureProcess = async () => {
     const readPicture = await readPictureFile(pathToNewPicture);
 
     // Note: Storing picture as string in order to avoid storing in disk
-    const pictureAsString = readPicture.dataBuffer.toString('base64');
+    const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
 
-    fs.writeFileSync('./test.txt', pictureAsString);
-
+    fs.writeFileSync('./test.txt', pictureAsBase64String);
 
     const imageFileName = currentImageFilePath
       .split('/')
       .pop();
 
     // Send picture to API endpoint
-    // await sendPictureToApi(readPicture, imageFileName);
+    await sendPictureToApi(pictureAsBase64String, imageFileName);
 
     // Delete Picture
-    // await deletePictureFile(currentImageFilePath);
+    await deletePictureFile(currentImageFilePath);
 
-    // processingImage = false;
+    processingImage = false;
 
   } // Closes if statement for proccessing image
 }
