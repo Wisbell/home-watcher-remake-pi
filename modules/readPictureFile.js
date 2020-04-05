@@ -8,6 +8,6 @@ module.exports.readPictureFile = (filePath) => {
         console.log('Done reading picture');
         resolve( { dataBuffer, filePath });
       }
-    })
-  })
+    });
+  });
 }

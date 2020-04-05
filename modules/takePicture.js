@@ -28,6 +28,6 @@ module.exports.takePicture = () => {
       }
       console.log('Done taking picture');
       resolve(createPath);
-    })
-  })
+    });
+  });
 }
