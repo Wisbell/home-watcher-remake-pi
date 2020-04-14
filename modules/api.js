@@ -1,5 +1,8 @@
 const axios = require('axios');
-const apiUrl = 'http://192.168.1.2:3000';
+const config = require('config');
+const apiUrl = config.get('api').url;
+
+console.log('apiUrl', apiUrl);
 
 // module.exports.sendPictureToApi = ( {dataBuffer, filePath}, imageFileName ) => {
 module.exports.sendPictureToApi = ( pictureBase64Encoded, imageFileName ) => {

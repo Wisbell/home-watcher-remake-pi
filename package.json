@@ -19,8 +19,10 @@
   "homepage": "https://github.com/Wisbell/home-watcher-remake-pi#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "config": "^3.3.1",
     "dotenv": "^8.2.0",
     "johnny-five": "^1.4.0",
+    "js-yaml": "^3.13.1",
     "raspi-io": "^11.0.0"
   }
 }
