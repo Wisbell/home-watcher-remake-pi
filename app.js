@@ -1,3 +1,4 @@
+// TODO: Remove or make use of dotenv config
 // Require environment variables
 require("dotenv").config();
 
