@@ -23,10 +23,11 @@ let createFileNameAsDate = () => {
 module.exports.takePicture = () => {
   return new Promise( (resolve, reject) => {
 
-    // Create argument to pass to execute raspistill
-    let fileName = createFileNameAsDate();
+    // Create filePath argument to pass to raspistill executable
+    const fileName = createFileNameAsDate();
     console.log('fileName', fileName);
-    let createPath = path.join(process.cwd(), fileName);
+    const createPath = path.join(process.cwd(), fileName);
+    console.log('createPath', createPath);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 
     exec(cameraArgument, (err, stdout, stderr) => {
