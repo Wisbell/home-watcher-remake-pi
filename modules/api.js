@@ -2,12 +2,8 @@ const axios = require('axios');
 const config = require('config');
 const apiUrl = config.get('api').url;
 
-console.log('apiUrl', apiUrl);
-
-// module.exports.sendPictureToApi = ( {dataBuffer, filePath}, imageFileName ) => {
 module.exports.sendPictureToApi = ( pictureBase64Encoded, imageFileName ) => {
-  // console.log('FilePath in api.js', filePath);
-  // console.log('DataBuffer in api.js', dataBuffer);
+  console.log('Sending picture to', apiUrl);
 
   return new Promise( async (resolve, reject) => {
     const imageModel = {
@@ -16,8 +12,19 @@ module.exports.sendPictureToApi = ( pictureBase64Encoded, imageFileName ) => {
       image: pictureBase64Encoded
     }
   
-    await axios.post(`${apiUrl}/images`, imageModel);
+    const postRequest = await axios.post(
+      `${apiUrl}/images`, 
+      imageModel, 
+      { timeout: 2000 }
+    ).catch( error => {
+      console.log('Error saving picture to database.');
+      return reject(error);
+    });
 
-    resolve();
+    if (!postRequest)
+      return reject();
+
+    console.log('Saving picture to database successful.');
+    return resolve();
   })
 }
