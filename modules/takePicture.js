@@ -17,7 +17,8 @@ let createFileNameAsDate = () => {
 }
 
 /**
- * Takes picture with raspbian raspistill command line utility.
+ * Takes picture with raspbian raspistill command line utility
+ * and saves it to provided path on file system.
  * @returns {string} Path to new picture
  */
 module.exports.takePicture = () => {

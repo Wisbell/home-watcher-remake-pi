@@ -3,9 +3,7 @@ require("dotenv").config();
 
 const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
-
 const { startPictureProcess } = require('./startPictureProcess');
-
 var calibrated = false;
 
 // Set up interface for Raspberry Pi hardware
