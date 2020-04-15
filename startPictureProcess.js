@@ -1,9 +1,7 @@
 const { takePicture } = require('./modules/takePicture');
 const { readPictureFile } = require('./modules/readPictureFile');
-const { sendPictureToApi } = require('./modules/api');
+const { sendPictureToApi } = require('./modules/sendPictureToApi');
 const { deletePictureFile } = require('./modules/removePictureFile.js');
-
-const fs = require('fs');
 
 // Set flag variable to prevent overloading the Raspberry Pi
 let processingImage = false;
@@ -22,22 +20,20 @@ module.exports.startPictureProcess = async () => {
     // Note: readPicture = { dataBuffer, filePath }
     const readPicture = await readPictureFile(pathToNewPicture);
 
-    // Note: Storing picture as string in order to avoid storing in disk
-    const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
+    // Note: Storing picture as string in order to avoid storing to disk
+    // const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
+    const pictureAsBase64String = readPicture.toString('base64');
 
-    fs.writeFileSync('./test.txt', pictureAsBase64String);
+    // const imageFileName = currentImageFilePath
+    //   .split('/')
+    //   .pop();
 
-    const imageFileName = currentImageFilePath
-      .split('/')
-      .pop();
+    // await sendPictureToApi(pictureAsBase64String, imageFileName);
+    await sendPictureToApi(pictureAsBase64String, currentImageFilePath);
 
-    // Send picture to API endpoint
-    await sendPictureToApi(pictureAsBase64String, imageFileName);
-
-    // Delete Picture
     await deletePictureFile(currentImageFilePath);
 
     processingImage = false;
 
-  } // Closes if statement for proccessing image
+  }
 }

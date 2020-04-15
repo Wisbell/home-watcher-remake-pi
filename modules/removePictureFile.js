@@ -1,11 +1,14 @@
 
 const { unlink } = require('fs');
 
-module.exports.deletePictureFile = (fileName) => {
+/**
+ * Removes picture from file system at specified file path
+ */
+module.exports.deletePictureFile = (pathToPicture) => {
   console.log("Deleting picture");
 
   return new Promise ((resolve, reject) => {
-    unlink(fileName, (err) => {
+    unlink(pathToPicture, (err) => {
       if (err) return console.log(err);
       console.log("Picture deleted successfully");
       resolve();
