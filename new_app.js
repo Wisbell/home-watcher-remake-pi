@@ -4,9 +4,9 @@ const Raspi = require("raspi-io").RaspiIO;
 
 class HomeWatcher {
 
-  board; // Johnny Five board
-  calibrated; // Calibration of motion detector: boolean
-  motion; // Johnny Five motion sensor
+  board // Johnny Five board
+  calibrated // Calibration of motion detector: boolean
+  motion // Johnny Five motion sensor
 
   constructor() {
     this.calibrated = false;
