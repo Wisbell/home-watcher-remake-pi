@@ -2,7 +2,7 @@ const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
 // const { startPictureProcess } = require('./startPictureProcess');
 
-let homeWatcherThis;
+let homeWatcherThis; // TODO: https://github.com/sindresorhus/auto-bind
 
 class HomeWatcher {
   constructor() {
@@ -32,7 +32,6 @@ class HomeWatcher {
       // Make sure motion sensor is properly calibrated
       homeWatcherThis.motion.on("calibrated", function(){
         console.log("Motion sensor calibrated!");
-        // console.log('this', this);
         homeWatcherThis.start();
       });
     });
@@ -57,7 +56,7 @@ class HomeWatcher {
 
       homeWatcherThis.motion.on("change", function(){
         console.log("motion change fired");
-      }); 
+      });
 
     } catch (error) {
       console.error('Error starting motion detector');
