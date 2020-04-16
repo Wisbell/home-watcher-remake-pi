@@ -13,9 +13,9 @@ class HomeWatcher {
   }
 
 
-  board = null // Johnny Five board
-  calibrated = null // Calibration of motion detector: boolean
-  // motion // Johnny Five motion sensor
+  board; // Johnny Five board
+  calibrated; // Calibration of motion detector: boolean
+  motion; // Johnny Five motion sensor
 
   /**
    * Board ready check and motion sensor calibration
