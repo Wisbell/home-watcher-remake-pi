@@ -76,6 +76,8 @@ class HomeWatcher {
 
     } catch (error) {
       console.error('Error starting motion detector');
+      // TODO: Send a message to parent (Rpi Server) telling it to set home watcher status to down
+      // process.send('');
       throw new Error(error);
     }
   }
