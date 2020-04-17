@@ -47,16 +47,17 @@ class HomeWatcher {
       homeWatcherThis.motion.on("motionstart", function(){
         console.log("motion started fired");
 
-        // if(calibrated) startPictureProcess();
+        startPictureProcess();
       });
 
       homeWatcherThis.motion.on("motionend", function(){
         console.log("motion ended fired");
       });
 
-      homeWatcherThis.motion.on("change", function(){
-        console.log("motion change fired");
-      });
+      // Note: Keeping for possible future use
+      // homeWatcherThis.motion.on("change", function(){
+      //   console.log("motion change fired");
+      // });
 
     } catch (error) {
       console.error('Error starting motion detector');
