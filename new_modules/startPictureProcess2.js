@@ -1,4 +1,5 @@
-const { takePicture } = require('../modules/takePicture');
+// const { takePicture } = require('../modules/takePicture');
+const { takePicture2 } = require('./takePicture2');
 const { readPictureFile } = require('../modules/readPictureFile');
 const { sendPictureToApi } = require('../modules/sendPictureToApi');
 const { deletePictureFile } = require('../modules/removePictureFile.js');
@@ -14,7 +15,7 @@ module.exports.startPictureProcess2 = async () => {
       processingImage = true;
       let currentImageFilePath;
 
-      const pathToNewPicture = await takePicture();
+      const pathToNewPicture = await takePicture2();
       currentImageFilePath = pathToNewPicture;
 
       // Note: readPicture = { dataBuffer, filePath }
