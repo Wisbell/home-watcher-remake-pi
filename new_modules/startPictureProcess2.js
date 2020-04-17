@@ -7,35 +7,39 @@ const { deletePictureFile } = require('../modules/removePictureFile.js');
 let processingImage = false;
 
 module.exports.startPictureProcess2 = async () => {
+  try {
+    if (!processingImage) {
+      console.log('Starting picture process');
 
-  if (!processingImage) {
-    console.log('Starting picture process');
+      processingImage = true;
+      let currentImageFilePath;
 
-    processingImage = true;
-    let currentImageFilePath;
+      const pathToNewPicture = await takePicture();
+      currentImageFilePath = pathToNewPicture;
 
-    const pathToNewPicture = await takePicture();
+      // Note: readPicture = { dataBuffer, filePath }
+      const readPicture = await readPictureFile(pathToNewPicture);
 
-    currentImageFilePath = pathToNewPicture;
+      // Note: Storing picture as string in order to avoid storing to disk
+      // const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
+      const pictureAsBase64String = readPicture.toString('base64');
 
-    // Note: readPicture = { dataBuffer, filePath }
-    const readPicture = await readPictureFile(pathToNewPicture);
+      // const imageFileName = currentImageFilePath
+      //   .split('/')
+      //   .pop();
 
-    // Note: Storing picture as string in order to avoid storing to disk
-    // const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
-    const pictureAsBase64String = readPicture.toString('base64');
+      // await sendPictureToApi(pictureAsBase64String, imageFileName);
+      await sendPictureToApi(pictureAsBase64String, currentImageFilePath);
 
-    // const imageFileName = currentImageFilePath
-    //   .split('/')
-    //   .pop();
+      await deletePictureFile(currentImageFilePath);
 
-    // await sendPictureToApi(pictureAsBase64String, imageFileName);
-    await sendPictureToApi(pictureAsBase64String, currentImageFilePath);
+      processingImage = false;
 
-    await deletePictureFile(currentImageFilePath);
+      console.log('Ending picture process');
+    }
 
-    processingImage = false;
-
-    console.log('Ending picture process');
+  } catch (error) {
+    throw error;
   }
+
 }
