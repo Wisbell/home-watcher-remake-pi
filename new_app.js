@@ -1,3 +1,5 @@
+import HomeWatcher from 'home-watcher';
+
 try {
   const homeWatcher = new HomeWatcher();
   homeWatcher.run();
