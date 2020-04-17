@@ -1,66 +1,72 @@
-// NOTE: Keeping this for possible future use.
-
 const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
+// const { startPictureProcess } = require('./startPictureProcess');
+const { startPictureProcess2 } = require('./startPictureProcess2');
 
+let homeWatcherThis; // TODO: https://github.com/sindresorhus/auto-bind
 
 export class HomeWatcher {
-
-  board = new Five.Board({
-    io: new Raspi()
-  });
-
-  motion = new Five.Motion('GPIO7');
-  calibrated = false;
-
-
-  setupAndStart () {
-    this.setup();
+  constructor() {
+    this.board = new Five.Board({
+      io: new Raspi()
+    });
+    homeWatcherThis = this;
   }
 
-  setup () {
-    console.log('Setting up home watcher app');
+  board; // Johnny Five board
+  motion; // Johnny Five motion sensor
+  calibratred = false; // Motion sensor is calibrated: boolean
 
-    try {
-      this.board.on("ready", function(){
-        console.log("Board ready");
-
-        this.motion.on("calibrated", function(){
-          console.log("Calibration completed");
-          calibrated = true;
-          this.start();
-        });
-
-      });
-    } catch (error) {
-      console.log('Error setting up home watcher app');
-      console.error(error);
-    }
+  run() {
+    this.setUpAndStart();
   }
 
-  start () {
-    console.log("Starting motion event listeners");
+  /**
+   * Board ready check and motion sensor calibration
+   */
+  setUpAndStart() {
+    this.board.on("ready", function(){
+      console.log("Board ready!");
 
+      // Set up motion module to use port General Purpose Input/Output port 7 on the Raspberry Pi
+      homeWatcherThis.motion = new Five.Motion('GPIO7');
+
+      // Make sure motion sensor is properly calibrated
+      homeWatcherThis.motion.on("calibrated", function(){
+        console.log("Motion sensor calibrated!");
+        homeWatcherThis.calibratred = true;
+
+        if(homeWatcherThis.calibratred)
+          homeWatcherThis.start();
+      });
+    });
+  }
+
+  /**
+   * Starts event listeners for motion detector
+   */
+  start() {
     try {
-      this.motion.on("motionstart", function(){
-        console.log("motion started");
+      console.log('Starting motion detection');
 
-        if(calibrated) {
-          console.log('Start picture process');
-        }
+      homeWatcherThis.motion.on("motionstart", function(){
+        console.log("motion started fired");
 
+        startPictureProcess2();
       });
 
-      this.motion.on("motionend", function(){
-        console.log("motion ended");
+      homeWatcherThis.motion.on("motionend", function(){
+        console.log("motion ended fired");
       });
 
-      this.motion.on("change", function(){
-        console.log("change fired");
-      });
+      // Note: Keeping for possible future use
+      // homeWatcherThis.motion.on("change", function(){
+      //   console.log("motion change fired");
+      // });
+
     } catch (error) {
-      console.log('Error starting motion event listeners');
-      console.error(error);
+      console.error('Error starting motion detector');
+      throw new Error(error);
     }
   }
 }
