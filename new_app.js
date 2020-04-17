@@ -16,7 +16,7 @@ class HomeWatcher {
   motion; // Johnny Five motion sensor
 
   run() {
-    this.setUpAndStart()
+    this.setUpAndStart();
   }
 
   /**
@@ -61,7 +61,7 @@ class HomeWatcher {
 
     } catch (error) {
       console.error('Error starting motion detector');
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 }
