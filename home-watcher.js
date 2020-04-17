@@ -1,7 +1,7 @@
 const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
 // const { startPictureProcess } = require('./startPictureProcess');
-const { startPictureProcess2 } = require('./startPictureProcess2');
+const { startPictureProcess2 } = require('./new_modules/startPictureProcess2');
 
 let homeWatcherThis; // TODO: https://github.com/sindresorhus/auto-bind
 
