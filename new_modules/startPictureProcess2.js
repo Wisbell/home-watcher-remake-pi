@@ -16,6 +16,7 @@ module.exports.startPictureProcess2 = async () => {
       let currentImageFilePath;
 
       const pathToNewPicture = await takePicture2();
+      console.log('pathToNewPicture', pathToNewPicture);
       currentImageFilePath = pathToNewPicture;
 
       // Note: readPicture = { dataBuffer, filePath }
