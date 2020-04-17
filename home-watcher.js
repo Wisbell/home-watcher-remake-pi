@@ -3,6 +3,8 @@ const Raspi = require("raspi-io").RaspiIO;
 // const { startPictureProcess } = require('./startPictureProcess');
 const { startPictureProcess2 } = require('./new_modules/startPictureProcess2');
 
+// NOTE: This is necessary so nested functions can make use of the class instance 'this'
+//        Possible fix in TODO or do more research on binding in javascript
 let homeWatcherThis; // TODO: https://github.com/sindresorhus/auto-bind
 
 class HomeWatcher {
@@ -49,13 +51,13 @@ class HomeWatcher {
     try {
       console.log('Starting motion detection');
 
-      homeWatcherThis.motion.on("motionstart", function(){
+      this.motion.on("motionstart", function(){
         console.log("motion started fired");
 
         startPictureProcess2();
       });
 
-      homeWatcherThis.motion.on("motionend", function(){
+      this.motion.on("motionend", function(){
         console.log("motion ended fired");
       });
 
