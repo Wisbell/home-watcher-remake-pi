@@ -9,6 +9,7 @@ let processingImage = false;
 module.exports.startPictureProcess2 = async () => {
 
   if (!processingImage) {
+    console.log('Starting picture process');
 
     processingImage = true;
     let currentImageFilePath;
@@ -35,5 +36,6 @@ module.exports.startPictureProcess2 = async () => {
 
     processingImage = false;
 
+    console.log('Ending picture process');
   }
 }

@@ -1,3 +1,8 @@
+/*
+  TODO: Start function may need to be async to properly handle errors with a try/catch or just do .catch on
+        the startPictureProcess function.
+*/
+
 const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
 // const { startPictureProcess } = require('./startPictureProcess');
@@ -54,7 +59,10 @@ class HomeWatcher {
       this.motion.on("motionstart", function(){
         console.log("motion started fired");
 
-        startPictureProcess2();
+        startPictureProcess2()
+          .catch(error => {
+            console.error(error);
+          });
       });
 
       this.motion.on("motionend", function(){
