@@ -1,4 +1,4 @@
-const HomeWatcher = require('home-watcher');
+const HomeWatcher = require('./home-watcher');
 
 try {
   const homeWatcher = new HomeWatcher();
