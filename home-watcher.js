@@ -5,7 +5,7 @@ const { startPictureProcess2 } = require('./startPictureProcess2');
 
 let homeWatcherThis; // TODO: https://github.com/sindresorhus/auto-bind
 
-export class HomeWatcher {
+class HomeWatcher {
   constructor() {
     this.board = new Five.Board({
       io: new Raspi()
@@ -70,3 +70,5 @@ export class HomeWatcher {
     }
   }
 }
+
+module.exports = HomeWatcher;
