@@ -14,6 +14,7 @@ class HomeWatcher {
 
   board; // Johnny Five board
   motion; // Johnny Five motion sensor
+  calibratred = false; // Motion sensor is calibrated: boolean
 
   run() {
     this.setUpAndStart();
@@ -32,7 +33,10 @@ class HomeWatcher {
       // Make sure motion sensor is properly calibrated
       homeWatcherThis.motion.on("calibrated", function(){
         console.log("Motion sensor calibrated!");
-        homeWatcherThis.start();
+        homeWatcherThis.calibratred = true;
+
+        if(homeWatcherThis.calibratred)
+          homeWatcherThis.start();
       });
     });
   }
