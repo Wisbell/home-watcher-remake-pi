@@ -1,6 +1,5 @@
 const { execSync } = require("child_process");
 const path = require('path');
-const { deletePictureFile } = require('../modules/removePictureFile.js');
 
 /**
  * Create file name using current date.
@@ -22,7 +21,7 @@ let createFileNameAsDate = () => {
  * and saves it to provided path on the file system.
  * @returns {string} Path to new picture
  */
-module.exports.takePicture2 = () => {
+module.exports.takePicture = () => {
   try {
     // Create filePath argument to pass to raspistill executable
     const fileName = createFileNameAsDate();

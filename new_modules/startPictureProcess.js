@@ -1,6 +1,6 @@
-const { takePicture2 } = require('./takePicture2');
-const { readPictureFile2 } = require('./readPictureFile2');
-const { sendPictureToApi2 } = require('./sendPictureToApi2');
+const { takePicture } = require('./takePicture');
+const { readPictureFile } = require('./readPictureFile');
+const { sendPictureToApi } = require('./sendPictureToApi');
 const { deletePictureFile } = require('./deletePictureFile');
 
 // Set flag variable to prevent overloading the Raspberry Pi
@@ -13,14 +13,14 @@ module.exports.startPictureProcess = async () => {
 
       processingImage = true;
 
-      var pathToNewPicture = takePicture2();
+      var pathToNewPicture = takePicture();
 
-      const readPicture = readPictureFile2(pathToNewPicture);
+      const readPicture = readPictureFile(pathToNewPicture);
 
       // Note: Storing picture as string in order to avoid storing to disk
       const pictureAsBase64String = readPicture.toString('base64');
 
-      await sendPictureToApi2(pictureAsBase64String, pathToNewPicture);
+      await sendPictureToApi(pictureAsBase64String, pathToNewPicture);
     }
   } catch (error) {
     throw error;

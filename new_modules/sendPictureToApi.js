@@ -10,7 +10,7 @@ const { parseImageFileName } = require('./parseImageFileName');
  * @argument pictureBase64Encoded
  * @argument pathToNewPicture
  */
-module.exports.sendPictureToApi2 = async ( pictureBase64Encoded, pathToNewPicture ) => {
+module.exports.sendPictureToApi = async ( pictureBase64Encoded, pathToNewPicture ) => {
   try {
     console.log('Sending picture to', apiUrl);
     const imageFileName = parseImageFileName(pathToNewPicture);

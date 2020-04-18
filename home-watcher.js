@@ -59,7 +59,7 @@ class HomeWatcher {
       this.motion.on("motionstart", function(){
         console.log("motion started fired");
 
-        startPictureProcess2()
+        startPictureProcess()
           .catch(error => {
             console.error(error);
           });
