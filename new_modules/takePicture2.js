@@ -1,5 +1,6 @@
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
 const path = require('path');
+const { deletePictureFile } = require('../modules/removePictureFile.js');
 
 /**
  * Create file name using current date.
@@ -30,15 +31,16 @@ module.exports.takePicture2 = async () => {
     console.log('createPath', createPath);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 
-    exec(cameraArgument, (err, stdout, stderr) => {
+    execSync(cameraArgument, (err, stdout, stderr) => {
       if(err) {
         console.log("err", err);
         throw err;
       }
       console.log('Done taking picture');
-      return createPath;
     });
+
+    return createPath;
   } catch (error) {
     throw error;
-  }
+  } 
 }

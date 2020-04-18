@@ -42,6 +42,5 @@ module.exports.startPictureProcess2 = async () => {
 
   } catch (error) {
     throw error;
-  }
-
+  } 
 }
