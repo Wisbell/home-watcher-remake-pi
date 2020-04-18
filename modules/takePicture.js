@@ -1,4 +1,4 @@
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
 const path = require('path');
 
 /**
@@ -18,12 +18,11 @@ let createFileNameAsDate = () => {
 
 /**
  * Takes picture with raspbian raspistill command line utility
- * and saves it to provided path on file system.
+ * and saves it to provided path on the file system.
  * @returns {string} Path to new picture
  */
 module.exports.takePicture = () => {
-  return new Promise( (resolve, reject) => {
-
+  try {
     // Create filePath argument to pass to raspistill executable
     const fileName = createFileNameAsDate();
     console.log('fileName', fileName);
@@ -31,13 +30,16 @@ module.exports.takePicture = () => {
     console.log('createPath', createPath);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 
-    exec(cameraArgument, (err, stdout, stderr) => {
+    execSync(cameraArgument, (err, stdout, stderr) => {
       if(err) {
-        console.log("error", err);
-        reject(err);
+        console.log("err", err);
+        throw err;
       }
       console.log('Done taking picture');
-      resolve(createPath);
     });
-  });
+
+    return createPath;
+  } catch (error) {
+    throw error;
+  } 
 }
