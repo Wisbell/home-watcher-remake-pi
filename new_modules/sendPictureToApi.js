@@ -21,12 +21,11 @@ module.exports.sendPictureToApi = async ( pictureBase64Encoded, pathToNewPicture
       image: pictureBase64Encoded
     }
 
+    // Note: Axios timeout does not work with connection timeouts hence the cancel token
     // If connection is valid the Timeout Logic block will get executed.
     let source = CancelToken.source();
     setTimeout(() => {
       source.cancel();
-      // Timeout Logic
-      console.log('Server is offline');
     }, 3000);
 
 
