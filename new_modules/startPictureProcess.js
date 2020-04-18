@@ -6,7 +6,7 @@ const { deletePictureFile } = require('./deletePictureFile');
 // Set flag variable to prevent overloading the Raspberry Pi
 let processingImage = false;
 
-module.exports.startPictureProcess2 = async () => {
+module.exports.startPictureProcess = async () => {
   try {
     if (!processingImage) {
       console.log('Starting picture process');
@@ -14,7 +14,6 @@ module.exports.startPictureProcess2 = async () => {
       processingImage = true;
 
       var pathToNewPicture = takePicture2();
-      console.log('pathToNewPicture', pathToNewPicture);
 
       const readPicture = readPictureFile2(pathToNewPicture);
 
