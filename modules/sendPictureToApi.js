@@ -1,8 +1,7 @@
 const axios = require('axios');
 const CancelToken = axios.CancelToken;
 const config = require('config');
-const apiUrl = config.get('api').url;
-const { deletePictureFile } = require('./deletePictureFile');
+const apiUrl = config.get('homeWatcherApi').url;
 const { parseImageFileName } = require('./parseImageFileName');
 
 /**
@@ -29,9 +28,9 @@ module.exports.sendPictureToApi = async ( pictureBase64Encoded, pathToNewPicture
     }, 3000);
 
     const postRequest = await axios.post(
-      `${apiUrl}/images`, 
-      imageModel, 
-      { 
+      `${apiUrl}/images`,
+      imageModel,
+      {
         timeout: 3000,
         cancelToken: source.token
       }
