@@ -28,7 +28,6 @@ module.exports.sendPictureToApi = async ( pictureBase64Encoded, pathToNewPicture
       source.cancel();
     }, 3000);
 
-
     const postRequest = await axios.post(
       `${apiUrl}/images`, 
       imageModel, 
