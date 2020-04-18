@@ -26,7 +26,7 @@ module.exports.takePicture = () => {
     // Create filePath argument to pass to raspistill executable
     const fileName = createFileNameAsDate();
     console.log('fileName', fileName);
-    const createPath = path.join(process.cwd(), fileName);
+    const createPath = path.join(process.cwd(), 'images', fileName);
     console.log('createPath', createPath);
     let cameraArgument = [ "/opt/vc/bin/raspistill", "-vf -hf", "-n", "-q 10", "-t 1", "-o", createPath ].join(" ");
 
