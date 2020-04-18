@@ -5,8 +5,7 @@
 
 const Five = require("johnny-five");
 const Raspi = require("raspi-io").RaspiIO;
-// const { startPictureProcess } = require('./startPictureProcess');
-const { startPictureProcess } = require('./new_modules/startPictureProcess');
+const { startPictureProcess } = require('./modules/startPictureProcess');
 
 // NOTE: This is necessary so nested functions can make use of the class instance 'this'
 //        Possible fix in TODO or do more research on binding in javascript
