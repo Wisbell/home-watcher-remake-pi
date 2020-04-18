@@ -1,8 +1,7 @@
-// const { takePicture } = require('../modules/takePicture');
 const { takePicture2 } = require('./takePicture2');
-const { readPictureFile } = require('../modules/readPictureFile');
-const { sendPictureToApi } = require('../modules/sendPictureToApi');
-const { deletePictureFile } = require('../modules/removePictureFile.js');
+const { readPictureFile2 } = require('./readPictureFile2');
+const { sendPictureToApi2 } = require('./sendPictureToApi2');
+const { deletePictureFile } = require('./deletePictureFile');
 
 // Set flag variable to prevent overloading the Raspberry Pi
 let processingImage = false;
@@ -13,34 +12,24 @@ module.exports.startPictureProcess2 = async () => {
       console.log('Starting picture process');
 
       processingImage = true;
-      let currentImageFilePath;
 
-      const pathToNewPicture = await takePicture2();
+      var pathToNewPicture = takePicture2();
       console.log('pathToNewPicture', pathToNewPicture);
-      currentImageFilePath = pathToNewPicture;
 
-      // Note: readPicture = { dataBuffer, filePath }
-      const readPicture = await readPictureFile(pathToNewPicture);
+      const readPicture = readPictureFile2(pathToNewPicture);
 
       // Note: Storing picture as string in order to avoid storing to disk
-      // const pictureAsBase64String = readPicture.dataBuffer.toString('base64');
       const pictureAsBase64String = readPicture.toString('base64');
 
-      // const imageFileName = currentImageFilePath
-      //   .split('/')
-      //   .pop();
-
-      // await sendPictureToApi(pictureAsBase64String, imageFileName);
-      await sendPictureToApi(pictureAsBase64String, currentImageFilePath);
-
-      await deletePictureFile(currentImageFilePath);
-
-      processingImage = false;
-
-      console.log('Ending picture process');
+      await sendPictureToApi2(pictureAsBase64String, pathToNewPicture);
     }
-
   } catch (error) {
     throw error;
-  } 
+  } finally {
+    if (processingImage && pathToNewPicture) {
+      deletePictureFile(pathToNewPicture);
+      processingImage = false;
+      console.log('Ending picture process');
+    }
+  }
 }

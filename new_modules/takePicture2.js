@@ -22,7 +22,7 @@ let createFileNameAsDate = () => {
  * and saves it to provided path on the file system.
  * @returns {string} Path to new picture
  */
-module.exports.takePicture2 = async () => {
+module.exports.takePicture2 = () => {
   try {
     // Create filePath argument to pass to raspistill executable
     const fileName = createFileNameAsDate();
