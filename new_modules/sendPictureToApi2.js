@@ -1,4 +1,5 @@
 const axios = require('axios');
+const CancelToken = axios.CancelToken;
 const config = require('config');
 const apiUrl = config.get('api').url;
 const { deletePictureFile } = require('./deletePictureFile');
@@ -20,10 +21,22 @@ module.exports.sendPictureToApi2 = async ( pictureBase64Encoded, pathToNewPictur
       image: pictureBase64Encoded
     }
 
+    // If connection is valid the Timeout Logic block will get executed.
+    let source = CancelToken.source();
+    setTimeout(() => {
+      source.cancel();
+      // Timeout Logic
+      console.log('Server is offline');
+    }, 3000);
+
+
     const postRequest = await axios.post(
       `${apiUrl}/images`, 
       imageModel, 
-      { timeout: 2000 }
+      { 
+        timeout: 3000,
+        cancelToken: source.token
+      }
     ).catch( error => {
       console.log('Error saving picture to database.');
     });
