@@ -4,6 +4,8 @@
 
 Allows the front end <a href="https://github.com/Wisbell/home-watcher-remake-front-end#readme" target="blank">Home Watcher Angular application</a> to start and stop the camera.
 
+![Alt text](/my_rpi2.jpg?raw=true "Home Watcher - RPI picture")
+
 ## Setup
 - Setup motion sensor to use pin 7
 
