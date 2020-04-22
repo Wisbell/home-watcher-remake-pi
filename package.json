@@ -4,6 +4,9 @@
   "description": "Updated Home Watcher Raspberry Pi Progarm",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
+    "start:dev": "export NODE_ENV=development && node app.js",
+    "start:prod": "export NODE_ENV=production && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +22,10 @@
   "homepage": "https://github.com/Wisbell/home-watcher-remake-pi#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "config": "^3.3.1",
     "dotenv": "^8.2.0",
     "johnny-five": "^1.4.0",
+    "js-yaml": "^3.13.1",
     "raspi-io": "^11.0.0"
   }
 }
