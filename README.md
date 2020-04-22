@@ -2,7 +2,7 @@
 
 ## Description
 
-Allows the front end <a href="https://github.com/Wisbell/home-watcher-remake-front-end" target="blank">Home Watcher Angular application</a> to start and stop the camera.
+Allows the front end <a href="https://github.com/Wisbell/home-watcher-remake-front-end#readme" target="blank">Home Watcher Angular application</a> to start and stop the camera.
 
 ## Installation
 
