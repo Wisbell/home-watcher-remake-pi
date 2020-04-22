@@ -4,6 +4,13 @@
 
 Allows the front end <a href="https://github.com/Wisbell/home-watcher-remake-front-end#readme" target="blank">Home Watcher Angular application</a> to start and stop the camera.
 
+## Setup
+- Setup motion sensor to use pin 7
+
+[Johnny Five Motion API](http://johnny-five.io/api/motion/)
+
+[RPI board layout](https://www.electronicwings.com/public/images/user_images/images/Raspberry%20Pi/RaspberryPi_GPIO/Raspberry%20pi%203%20GPIO_pins_v2.png)
+
 ## Installation
 
 ```bash
